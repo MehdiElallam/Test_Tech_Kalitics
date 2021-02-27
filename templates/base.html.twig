@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+        <meta charset="utf-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+
+        <!-- App css -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/metisMenu.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+        <div class="left-sidenav">
+                <div class="brand">
+                    <a href="index-2.html" class="logo">
+                        <span>
+                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="logo-small" class="logo-sm">
+                        </span>
+                        <span>
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="logo-large" class="logo-lg logo-light">
+                            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="logo-large" class="logo-lg logo-dark">
+                        </span>
+                    </a>
+                </div>
+                <div class="menu-content h-100" data-simplebar>
+                    <ul class="metismenu left-sidenav-menu">
+                        <li class="menu-label mt-0">Main</li>
+                        <li>
+                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Employés</span>
+                                <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li class="nav-item"><a class="nav-link" href="index-2.html"><i class="ti-control-record"></i>Liste des employés</a></li>
+                                <li class="nav-item"><a class="nav-link" href="sales-index.html"><i class="ti-control-record"></i>Nouveau employé</a></li> 
+                            </ul>
+                        </li>   
+                        <li>
+                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Pointage</span>
+                                <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li class="nav-item"><a class="nav-link" href="index-2.html"><i class="ti-control-record"></i>Liste des employés</a></li>
+                                <li class="nav-item"><a class="nav-link" href="sales-index.html"><i class="ti-control-record"></i>Nouveau employé</a></li> 
+                            </ul>
+                        </li>   
+                        <li>
+                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Chantier</span>
+                                <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li class="nav-item"><a class="nav-link" href="index-2.html"><i class="ti-control-record"></i>Liste des employés</a></li>
+                                <li class="nav-item"><a class="nav-link" href="sales-index.html"><i class="ti-control-record"></i>Nouveau employé</a></li> 
+                            </ul>
+                        </li>         
+                    </ul>
+                </div>
+        </div>
+        <div class="page-wrapper">
+        <div class="topbar">            
+            <nav class="navbar-custom">    
+                    <ul class="list-unstyled topbar-nav float-right mb-0">  
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="{{ asset('assets/images/users/user-5.jpg') }}" alt="profile-user" class="rounded-circle thumb-xs">
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" style="">
+                                <a class="dropdown-item text-center" href="javascript:;"> 
+                                    <b>{{ app.user.Prenom }} {{ app.user.Nom }}</b> 
+                                    <small>{{ app.user.roles[0] }}</small>
+                                </a>
+                                <hr />
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled topbar-nav mb-0">                        
+                        <li>
+                            <button class="nav-link button-menu-mobile">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu align-self-center topbar-icon"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            </button>
+                        </li> 
+                                                
+                    </ul>
+                </nav>
+            </div>
+            {% block body %}{% endblock %}
+        </div>
+
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/metismenu.min.js') }}"></script>
+        <script src="{{ asset('assets/js/waves.js') }}"></script>
+        <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/js/simplebar.min.js') }}"></script>
+        <script src="{{ asset('assets/js/moment.js') }}"></script>
+
+        <!-- App js -->
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+    </body>
+</html>

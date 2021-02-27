@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les employés{% endblock %}
+
+{% block body %}
+
+    <div class="page-content" style="margin-top: 35px">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h4 class="page-title" >Les employés</h4>
+            </div>
+            <div class="col-auto align-self-center">
+                     
+                <a class="btn btn-sm btn-soft-primary" href="{{ path('nouveau_employe') }}">Nouveau employé</a>
+            </div> 
+        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Matricule</th>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>{{ user.id }}</td>
+                                            <td>{{ user.Matricule }}</td>
+                                            <td>{{ user.Nom }}</td>
+                                            <td>{{ user.Prenom }}</td>
+                                            <td class="text-right">                                                       
+                                                {{ include('user/_delete_form.html.twig') }}
+                                                <a style="float:right;margin-right:10px" class="btn btn-info btn-sm" href="{{ path('editer_employe', {'id': user.id}) }}">Afficher</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
