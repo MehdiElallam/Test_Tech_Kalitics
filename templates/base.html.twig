@@ -40,28 +40,28 @@
                                 <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li class="nav-item"><a class="nav-link" href="index-2.html"><i class="ti-control-record"></i>Liste des employés</a></li>
-                                <li class="nav-item"><a class="nav-link" href="sales-index.html"><i class="ti-control-record"></i>Nouveau employé</a></li> 
+                                <li class="nav-item"><a class="nav-link" href="{{ path('liste_employes') }}"><i class="ti-control-record"></i>Liste des employés</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('nouveau_employe') }}"><i class="ti-control-record"></i>Nouveau employé</a></li> 
                             </ul>
-                        </li>   
+                        </li>     
                         <li>
-                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Pointage</span>
+                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Chantiers</span>
                                 <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li class="nav-item"><a class="nav-link" href="index-2.html"><i class="ti-control-record"></i>Liste des employés</a></li>
-                                <li class="nav-item"><a class="nav-link" href="sales-index.html"><i class="ti-control-record"></i>Nouveau employé</a></li> 
+                                <li class="nav-item"><a class="nav-link" href="{{ path('liste_chantiers') }}"><i class="ti-control-record"></i>Liste des chantiers</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('nouveau_chantier') }}"><i class="ti-control-record"></i>Nouveau chantier</a></li> 
                             </ul>
                         </li>   
                         <li>
-                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Chantier</span>
+                            <a href="javascript: void(0);"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Pointages</span>
                                 <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li class="nav-item"><a class="nav-link" href="index-2.html"><i class="ti-control-record"></i>Liste des employés</a></li>
-                                <li class="nav-item"><a class="nav-link" href="sales-index.html"><i class="ti-control-record"></i>Nouveau employé</a></li> 
+                                <li class="nav-item"><a class="nav-link" href="{{ path('liste_pointages') }}"><i class="ti-control-record"></i>Liste de pointage</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('nouveau_pointage') }}"><i class="ti-control-record"></i>Nouveau pointage</a></li> 
                             </ul>
-                        </li>         
+                        </li>       
                     </ul>
                 </div>
         </div>
@@ -77,7 +77,6 @@
                             <div class="dropdown-menu dropdown-menu-right" style="">
                                 <a class="dropdown-item text-center" href="javascript:;"> 
                                     <b>{{ app.user.Prenom }} {{ app.user.Nom }}</b> 
-                                    <small>{{ app.user.roles[0] }}</small>
                                 </a>
                                 <hr />
                                 <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
@@ -108,5 +107,26 @@
 
         <!-- App js -->
         <script src="{{ asset('assets/js/app.js') }}"></script>
+
+        <script>
+            function verifierEmploye(param){
+                let user_id = $(param).val();
+
+                $.ajax({
+                    url : `/pointages/verifier/${user_id}`,
+                    type : 'GET',
+                    dataType : 'JSON',
+                    success : function(response){
+                        if(response.dejaPointe > 0){
+                            $('#employee_error').html(`Cet employé a déja été pointé aujourd'hui`)
+                            $('#submit_btn').attr('disabled', true)
+                        }else{
+                            $('#employee_error').html('')
+                            $('#submit_btn').attr('disabled', false)
+                        }
+                    }
+                })
+            }
+        </script>
     </body>
 </html>

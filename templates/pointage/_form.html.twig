@@ -1,0 +1,40 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">                                    
+                <div class="general-label">
+                     <div class="form-group row">
+                        <div class="col-sm-12">
+                            {{ form_row(form.date_pointage) }}
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-sm-12">
+                            {{ form_row(form.duree) }}
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-sm-12">
+                            {{ form_row(form.user) }}
+                            <small style="color : red" id="employee_error"></small>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <div class="col-sm-12">
+                            {{ form_row(form.chantier) }}
+                        </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button id="submit_btn" type="submit" style="display:block;margin: 0 auto" class="btn {{ class_name|default('btn-success') }} btn-sm">{{ button_label|default('Enregistrer') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}

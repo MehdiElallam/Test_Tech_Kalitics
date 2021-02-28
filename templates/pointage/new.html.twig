@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau pointage{% endblock %}
+
+{% block body %}
+<div class="page-content" style="margin-top: 35px">
+        <div class="container-fluid">
+            <h4 class="page-title" >Nouveau pointage</h4>
+            {{ include('pointage/_form.html.twig') }}
+            <a class="btn btn-info btn-sm" style="float:right; margin-right:10px" href="{{ path('liste_pointages') }}">Retour à la liste des pointages</a>
+        </div>
+</div>
+{% endblock %}
