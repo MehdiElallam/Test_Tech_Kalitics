@@ -4,7 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ChantierRepository;
-use Symfony\Component\Validator\Constraints\DateTime;
+use DateTimeInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity(repositoryClass=ChantierRepository::class)
@@ -40,7 +41,7 @@ class Chantier
     private $Pointages;
 
     public function __construct(){
-        $this->date_debut = new \DateTime();
+        // $this->date_debut = new \DateTime();
     }
 
     public function getId(): ?int
@@ -72,12 +73,12 @@ class Chantier
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut()
     {
         return $this->date_debut;
     }
 
-    public function setDateDebut(\DateTimeInterface $date_debut): self
+    public function setDateDebut(DateTimeInterface $date_debut): self
     {
         $this->date_debut = $date_debut;
 
