@@ -26,12 +26,7 @@ class UserType extends AbstractType
             ->add('Matricule', TextType::class, [
                 'label' => 'Matricule :',
                 'attr' => array('class' => 'form-control')
-            ])
-            ->add('password', TextType::class, [
-                'label' => 'Mot de passe :',
-                'attr' => array('class' => 'form-control')
-            ])
-        ;
+            ]);
 
         // $builder->get('roles')
         //         ->addModelTransformer(new CallbackTransformer(
