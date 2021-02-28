@@ -1,39 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chantier index{% endblock %}
+{% block title %}Les chantiers{% endblock %}
 
 {% block body %}
-    <h1>Chantier index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Date_debut</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for chantier in chantiers %}
-            <tr>
-                <td>{{ chantier.id }}</td>
-                <td>{{ chantier.Nom }}</td>
-                <td>{{ chantier.Adresse }}</td>
-                <td>{{ chantier.dateDebut ? chantier.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('chantier_show', {'id': chantier.id}) }}">show</a>
-                    <a href="{{ path('chantier_edit', {'id': chantier.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="page-content" style="margin-top: 35px">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h4 class="page-title" >Les chantiers</h4>
+            </div>
+            <div class="col-auto align-self-center">
+                <a class="btn btn-sm btn-soft-primary" href="{{ path('nouveau_chantier') }}">Nouveau chantier</a>
+            </div> 
+        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nom</th>
+                                            <th>Adresse</th>
+                                            <th>Date début</th>
+                                            <th>Nombre des employés</th>
+                                            <th>Heures cumulés</th>
+                                            <th class="text-center">actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for chantier in chantiers %}
+                                        <tr>
+                                            <td>#{{ chantier.id }}</td>
+                                            <td>{{ chantier.nom }}</td>
+                                            <td>{{ chantier.adresse }}</td>
+                                            <td>{{ chantier.date_debut ? chantier.date_debut|date('Y-m-d') : '' }}</td>
+                                            <td align="center">{{ chantier.nombre_employes_pointes }}</td>
+                                            <td align="center">{{ chantier.duree_total|default('0') }}</td>
+                                            <td width="300">
+                                                {{ include('chantier/_delete_form.html.twig') }}
+                                                <a style="float:right;margin-right:10px" class="btn btn-info btn-sm" href="{{ path('editer_chantier', {'id': chantier.id}) }}">Afficher</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="7" class="text-center">Aucun chantier à afficher</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
 
-    <a href="{{ path('chantier_new') }}">Create new</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Chantier{% endblock %}
+{% block title %}Nouveau chantier{% endblock %}
 
 {% block body %}
-    <h1>Create new Chantier</h1>
+<div class="page-content" style="margin-top: 35px">
+        <div class="container-fluid">
+            <h4 class="page-title" >Nouveau chantier</h4>
 
-    {{ include('chantier/_form.html.twig') }}
-
-    <a href="{{ path('chantier_index') }}">back to list</a>
+            {{ include('chantier/_form.html.twig') }}
+            <a class="btn btn-info btn-sm" style="float:right; margin-right:10px" href="{{ path('liste_chantiers') }}">Retour à la liste des chantiers</a>
+        </div>
+</div>
 {% endblock %}
