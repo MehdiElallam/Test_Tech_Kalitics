@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Chantier;
+use App\Entity\User;
 use App\Entity\Pointage;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Pointage|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +21,34 @@ class PointageRepository extends ServiceEntityRepository
         parent::__construct($registry, Pointage::class);
     }
 
-    // /**
-    //  * @return Pointage[] Returns an array of Pointage objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllWithDetails():array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $con = $this->getEntityManager()->getConnection();
 
-    /*
-    public function findOneBySomeField($value): ?Pointage
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = '
+            SELECT p.id , p.date_pointage , p.duree , u.nom as employe_nom , u.prenom as employe_prenom , c.nom as chantier 
+            FROM pointage p , user u, chantier c
+            WHERE p.user_id = u.id AND p.chantier_id = c.id 
+            ORDER BY p.id DESC';
+        
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAllAssociative();
+       
     }
-    */
+
+    public function EmployeePointe($id):array
+    {
+        $con = $this->getEntityManager()->getConnection();
+
+        $query = '
+                SELECT id as pointage_aujourd FROM pointage WHERE user_id = '.$id.' AND DATE(date_pointage) = DATE(now())';
+        
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAllAssociative();
+       
+    }
+
+    
 }
