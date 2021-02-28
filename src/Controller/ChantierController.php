@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/chantier")
+ * @Route("/chantiers")
  */
 class ChantierController extends AbstractController
 {
     /**
-     * @Route("/", name="chantier_index", methods={"GET"})
+     * @Route("/", name="liste_chantiers", methods={"GET"})
      */
     public function index(ChantierRepository $chantierRepository): Response
     {
         return $this->render('chantier/index.html.twig', [
-            'chantiers' => $chantierRepository->findAll(),
+            'chantiers' => $chantierRepository->findAllWithDetails(),
         ]);
     }
 
     /**
-     * @Route("/new", name="chantier_new", methods={"GET","POST"})
+     * @Route("/nouveau", name="nouveau_chantier", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +39,7 @@ class ChantierController extends AbstractController
             $entityManager->persist($chantier);
             $entityManager->flush();
 
-            return $this->redirectToRoute('chantier_index');
+            return $this->redirectToRoute('liste_chantiers');
         }
 
         return $this->render('chantier/new.html.twig', [
@@ -49,17 +49,7 @@ class ChantierController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="chantier_show", methods={"GET"})
-     */
-    public function show(Chantier $chantier): Response
-    {
-        return $this->render('chantier/show.html.twig', [
-            'chantier' => $chantier,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="chantier_edit", methods={"GET","POST"})
+     * @Route("/{id}/editer", name="editer_chantier", methods={"GET","POST"})
      */
     public function edit(Request $request, Chantier $chantier): Response
     {
@@ -69,7 +59,7 @@ class ChantierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('chantier_index');
+            return $this->redirectToRoute('liste_chantiers');
         }
 
         return $this->render('chantier/edit.html.twig', [
@@ -79,7 +69,7 @@ class ChantierController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="chantier_delete", methods={"DELETE"})
+     * @Route("/{id}", name="supprimer_chantier", methods={"DELETE"})
      */
     public function delete(Request $request, Chantier $chantier): Response
     {
@@ -89,6 +79,6 @@ class ChantierController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('chantier_index');
+        return $this->redirectToRoute('liste_chantiers');
     }
 }

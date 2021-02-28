@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/admin/employes")
+ * @Route("/employes")
  */
 class UserController extends AbstractController
 {
@@ -23,7 +23,7 @@ class UserController extends AbstractController
         $this->passwordEncoder = $passwordEncoder;   
     }
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("/", name="liste_employes", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -109,4 +109,6 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
+    
 }
