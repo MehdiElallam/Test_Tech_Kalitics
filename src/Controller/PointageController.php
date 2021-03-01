@@ -16,12 +16,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class PointageController extends AbstractController
 {
+    
 
     /**
      * @Route("/", name="liste_pointages", methods={"GET"})
      */
     public function index(PointageRepository $pointageRepository): Response
     {
+        
         // dd($pointageRepository->findAllWithDetails());
         return $this->render('pointage/index.html.twig', [
             'pointages' => $pointageRepository->findAllWithDetails(),
@@ -33,13 +35,13 @@ class PointageController extends AbstractController
      */
     public function new(Request $request , UserRepository $userRepository): Response
     {
-        
         $pointage = new Pointage();
 
-        $form = $this->createForm(PointageType::class, $pointage);
+        $form = $this->createForm(PointageType::class, $pointage , [
+            'users' => $userRepository->findAllEmployes()
+        ]);
         $form->handleRequest($request);
 
-        // dd($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -96,16 +98,19 @@ class PointageController extends AbstractController
     /**
      * @Route("/verifier/{id}", name="verifier_employe", methods={"GET"})
      */
-    public function verifierEmploye($id , PointageRepository $pointageRepository)
+    public function verifiyEmploye($id , PointageRepository $pointageRepository)
     {
         $pointageAjourd = $pointageRepository->EmployeePointe($id);
+        $pointageHeures = $pointageRepository->EmployeeHours($id);
 
         $response = $this->json(
             array(
                 "dejaPointe" => count($pointageAjourd),
+                "TotalHeures" => intval($pointageHeures[0]['Total'])
             ), 200, []
         );
         
         return $response;
     }
+
 }

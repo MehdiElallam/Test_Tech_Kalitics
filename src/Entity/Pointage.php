@@ -6,6 +6,7 @@ use App\Entity\User;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PointageRepository;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -47,6 +48,7 @@ class Pointage
     {
         $this->user = new ArrayCollection();
         $this->Chantier = new ArrayCollection();
+        $this->date_pointage = new DateTime();
     }
 
     public function getId(): ?int
@@ -59,7 +61,7 @@ class Pointage
         return $this->date_pointage;
     }
 
-    public function setDatePointage(DateTimeInterface $date_pointage): self
+    public function setDatePointage(DateTime $date_pointage): self
     {
         $this->date_pointage = $date_pointage;
 

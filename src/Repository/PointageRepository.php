@@ -50,5 +50,20 @@ class PointageRepository extends ServiceEntityRepository
        
     }
 
+    public function EmployeeHours($id):array
+    {
+        $con = $this->getEntityManager()->getConnection();
+
+        $query = 'SELECT SUM(duree) AS Total FROM pointage WHERE CAST(date_pointage AS DATE) 
+                    BETWEEN CURDATE() AND DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) AND user_id = '.$id;
+        
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAllAssociative();
+       
+    }
+
+    
+
     
 }
