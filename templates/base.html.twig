@@ -22,15 +22,7 @@
     <body>
         <div class="left-sidenav">
                 <div class="brand">
-                    <a href="index-2.html" class="logo">
-                        <span>
-                            <img src="{{ asset('assets/images/logo-sm.png') }}" alt="logo-small" class="logo-sm">
-                        </span>
-                        <span>
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="logo-large" class="logo-lg logo-light">
-                            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="logo-large" class="logo-lg logo-dark">
-                        </span>
-                    </a>
+                    
                 </div>
                 <div class="menu-content h-100" data-simplebar>
                     <ul class="metismenu left-sidenav-menu">
@@ -109,18 +101,24 @@
         <script src="{{ asset('assets/js/app.js') }}"></script>
 
         <script>
-            function verifierEmploye(param){
-                let user_id = $(param).val();
+            verifierEmploye();
+            function verifierEmploye(){
+
+                let user_id = $('#pointage_user').val();
 
                 $.ajax({
                     url : `/pointages/verifier/${user_id}`,
                     type : 'GET',
                     dataType : 'JSON',
                     success : function(response){
-                        if(response.dejaPointe > 0){
+                        if(response.TotalHeures > 10){
+                            $('#employee_error').html(`Cet employé a dépassé 35 heures cette semaine`)
+                            $('#submit_btn').attr('disabled', true)
+                        }
+                        else if(response.dejaPointe > 0){
                             $('#employee_error').html(`Cet employé a déja été pointé aujourd'hui`)
                             $('#submit_btn').attr('disabled', true)
-                        }else{
+                        } else{
                             $('#employee_error').html('')
                             $('#submit_btn').attr('disabled', false)
                         }
